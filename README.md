@@ -22,51 +22,82 @@
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
+## Descrição
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Essa API foi feita para simular o backend de uma rede social. A API possui um crud completo de usuários e de posts que estão relacionados a um usuário,
+possui também autenticação de login e nivel de autorização.
 
-## Installation
+## Tecnologias Utilizadas
 
-```bash
-$ npm install
+- Node.js
+- Nest
+- Prisma
+- PostgreSQL
+- jwt
+- bcryptjs
+- Typescript
+
+
+## Instalação
+
+Siga os passos abaixo para poder rodar a aplicação no seu servidor local:
+
+1. Clone este repositório para sua máquina
+
+2. Com o projeto aberto, crie um arquivo chamado `.env` na raiz do projeto, fora da pasta src e 
+defina as variaveis de ambiente para se conectar ao seu banco de dados e sua chave secreta. 
+certifique-se de ter criado anteriormente o banco de dados que vai ser utilizado.
+
+```
+DATABASE_URL= postgresql://johndoe:randompassword@localhost:5432/mydb?schema=public
+SECRET_KEY= string
 ```
 
-## Running the app
+3. Rode o comando abaixo para instalar todas as dependencias:
 
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+```
+npm install
 ```
 
-## Test
+4. Rode um dos 2 comandos abaixo para iniciar no seu servidor local:
 
-```bash
-# unit tests
-$ npm run test
 
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+```
+npm run start
 ```
 
-## Support
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+```
+npm run start:dev
+```
 
-## Stay in touch
+## Endpoints
+<br/>
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+| Método | Endpoint       | Responsabilidade                       | Autenticação                           |
+| ------ | ---------------| ---------------------------------------| -------------------------------------- |
+| POST   |  /users        | cadastrar um usuário                   | qualquer usuário
+| GET    |  /users        | buscar todos usuários                  | qualquer usuário
+| GET    |  /users/:id    | buscar usuário por id                  | somente dono da conta 
+| PATCH  |  /users/:id    | atualizar informações do usuário       | somente dono da conta
+| DELETE |  /users/:id    | excluir usuário                        | somente dono da conta
+
+<br/>
+
+| Método | Endpoint       | Responsabilidade                       | Autenticação                           |
+| ------ | ---------------| ---------------------------------------| -------------------------------------- |
+| POST   | /auth/login    | iniciar sessão                         | somente usuário ja criado no banco 
+
+<br/>
+
+| Método | Endpoint       | Responsabilidade                       | Autenticação                           |
+| ------ | ---------------| ---------------------------------------| -------------------------------------- |
+| GET    | /posts         | buscar todos os posts                  | qualquer usuário 
+| POST   | /posts         | criar post                             | somente usuário logado
+| GET    | /posts/:id     | buscar por post específico             | qualquer usuário 
+| PATCH  | /posts/:id     | atualizar informações do post          | somente dono da conta
+| DELETE | /posts/:id     | excluir post                           | somente dono da conta
+
 
 ## License
 
