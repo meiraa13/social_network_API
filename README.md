@@ -79,7 +79,7 @@ npm run start:dev
 | POST   |  /users        | cadastrar um usuário                   | qualquer usuário
 | GET    |  /users        | buscar todos usuários                  | qualquer usuário
 | GET    |  /users/:id    | buscar usuário por id                  | somente dono da conta 
-| PATCH  |  /users/:id    | atualizar informações do usuário       | somente dono da conta
+| PUT    |  /users/:id    | atualizar informações do usuário       | somente dono da conta
 | DELETE |  /users/:id    | excluir usuário                        | somente dono da conta
 
 <br/>
@@ -95,7 +95,7 @@ npm run start:dev
 | GET    | /posts         | buscar todos os posts                  | qualquer usuário 
 | POST   | /posts         | criar post                             | somente usuário logado
 | GET    | /posts/:id     | buscar por post específico             | qualquer usuário 
-| PATCH  | /posts/:id     | atualizar informações do post          | somente dono da conta
+| PUT    | /posts/:id     | atualizar informações do post          | somente dono da conta
 | DELETE | /posts/:id     | excluir post                           | somente dono da conta
 
 
