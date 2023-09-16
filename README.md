@@ -98,6 +98,10 @@ npm run start:dev
 | PUT    | /posts/:id     | atualizar informações do post          | somente dono da conta
 | DELETE | /posts/:id     | excluir post                           | somente dono da conta
 
+## Documentação
+
+- com o servidor rodando você pode acessar a documentação pelo swagger no endereço: localhost:3000/api
+
 
 ## License
 

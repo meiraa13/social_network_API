@@ -1,8 +1,12 @@
+import { ApiProperty } from "@nestjs/swagger"
 import { IsString,  IsNotEmpty} from "class-validator"
-import { User } from "src/modules/users/entities/user.entity"
+
 
 export class CreatePostDto {
 
+    @ApiProperty({
+        default:"conteúdo do seu post"
+    })
     @IsNotEmpty()
     @IsString()
     content: string
