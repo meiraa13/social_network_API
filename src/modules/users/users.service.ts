@@ -27,6 +27,10 @@ export class UsersService {
       where:{id}
     })
 
+    if(!foundUser){
+      throw new NotFoundException("usuário não encontrado")
+    }
+
     return plainToInstance(User, foundUser)
   }
 

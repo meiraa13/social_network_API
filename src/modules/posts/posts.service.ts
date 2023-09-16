@@ -1,26 +1,62 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
+import { PrismaService } from 'src/database/prisma.service';
+
 
 @Injectable()
 export class PostsService {
-  create(createPostDto: CreatePostDto) {
-    return 'This action adds a new post';
+  constructor(private prisma: PrismaService){}
+
+  async create(data: CreatePostDto, userId:number) {
+    const newPost = await this.prisma.post.create({
+      data: {
+        content:data.content,
+        user:{
+          connect:{id:userId}
+        }
+      }
+    })
+
+    return newPost
   }
 
-  findAll() {
-    return `This action returns all posts`;
+  async findAll() {
+    const posts = await this.prisma.post.findMany({
+      include:{
+        user:true
+      }
+    })
+
+    for(const post of posts){
+      delete post.user.password
+    } 
+    return posts
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} post`;
+  async findOne(id: number) {
+    const foundPost = await this.prisma.post.findUnique({
+      where:{id}
+    }) 
+
+    if(!foundPost){
+      throw new NotFoundException("post não encontrado")
+    }
+    return foundPost
   }
 
-  update(id: number, updatePostDto: UpdatePostDto) {
-    return `This action updates a #${id} post`;
+  async update(id: number, data: UpdatePostDto) {
+    const updatedPost = await this.prisma.post.update({
+      where:{id},
+      data
+    })
+    return updatedPost
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} post`;
+  async remove(id: number) {
+    await this.prisma.post.delete({
+      where:{id}
+    })
+    
   }
 }

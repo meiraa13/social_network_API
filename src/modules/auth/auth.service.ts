@@ -12,12 +12,12 @@ export class AuthService {
 
         const comparePassword = await compare(pass, user?.password)
         if(!comparePassword){
-            throw new UnauthorizedException()
+            throw new UnauthorizedException("email ou senha inválidos")
         }
         
         const payload = {
             sub:user.id,
-            email: user.email
+            email: user.email,
         }
 
         return {
