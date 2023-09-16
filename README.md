@@ -59,7 +59,13 @@ SECRET_KEY= string
 npm install
 ```
 
-4. Rode um dos 2 comandos abaixo para iniciar no seu servidor local:
+4. Agora rode o comando abaixo para gerar as migrações:
+
+```
+npx prisma migrate dev
+```
+
+5. Rode um dos 2 comandos abaixo para iniciar no seu servidor local:
 
 
 ```
